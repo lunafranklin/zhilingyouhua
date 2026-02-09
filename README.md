@@ -1,160 +1,151 @@
-# SmartTuneAI - 智能指令优化工具
+# 指令优化工具
 
-<p align="center">
-  <img src="frontend/public/vite.svg" alt="Logo" width="80" height="80">
-</p>
+一个在线 AI 提示词优化工具，帮助用户优化输入的指令内容。
 
-<p align="center">
-  <strong>AI 驱动的智能指令优化平台</strong>
-</p>
+## 功能特点
 
-<p align="center">
-  基于大模型的指令优化工具，帮助用户快速优化文本内容
-</p>
+- ⚡ **快速优化** - 输入内容，选择规则，一键优化
+- 🏪 **规则商店** - 提供多种预置规则，支持自定义规则
+- ➕ **自定义规则** - 用户可以创建自己的优化规则
+- 💾 **本地存储** - 自定义规则保存在浏览器本地
+- 👋 **新手友好** - 首次使用有详细引导
 
-<p align="center">
-  <a href="#功能特点">功能特点</a> •
-  <a href="#技术栈">技术栈</a> •
-  <a href="#快速开始">快速开始</a> •
-  <a href="#项目结构">项目结构</a>
-</p>
-
----
-
-## ✨ 功能特点
-
-### 🎯 核心功能
-- **快速优化**：输入内容 → 选择规则 → 一键生成高质量优化结果
-- **规则商店**：提供多种预置规则，也可以创建专属优化规则
-- **自定义规则**：根据需求创建个性化规则，满足特殊场景
-
-### 👤 用户系统
-- 用户注册/登录
-- 本地存储用户数据
-- 每日 10 次免费使用
-
-### 📱 响应式设计
-- PC端：顶部导航 + 左右分栏布局
-- 移动端：顶部导航 + 上下堆叠布局
-
-## 🛠 技术栈
+## 技术栈
 
 ### 前端
-- **React 18** - 用户界面框架
-- **Vite** - 构建工具
-- **TailwindCSS** - 原子化 CSS 框架
-- **React Router** - 路由管理
-- **React Context** - 状态管理
+- React + Vite
+- Tailwind CSS
+- React Router
 
-### 后端（预留）
+### 后端
 - Node.js + Express
-- ModelScope 大模型 API
+- 支持多种大模型 API（Kimi、智谱、通义千问等）
 
-## 🚀 快速开始
+## 快速开始
 
-### 环境要求
-- Node.js 18+
-- npm 或 yarn
-
-### 安装依赖
+### 1. 安装依赖
 
 ```bash
 # 安装前端依赖
 cd frontend
 npm install
 
-# 安装后端依赖（可选）
+# 安装后端依赖
 cd ../backend
 npm install
 ```
 
-### 启动开发服务器
+### 2. 配置 API Key
+
+编辑 `backend/.env` 文件，配置大模型 API Key：
+
+```env
+# 使用 Kimi (推荐，有免费额度)
+LLM_PROVIDER=kimi
+KIMI_API_KEY=你的Kimi_API_Key
+KIMI_MODEL=moonshot-v1-8k
+
+# 或使用智谱 AI
+# LLM_PROVIDER=zhipu
+# ZHIPU_API_KEY=你的智谱_API_Key
+
+# 或使用通义千问
+# LLM_PROVIDER=tongyi
+# TONGYI_API_KEY=你的通义_API_Key
+```
+
+获取 API Key：
+- [Kimi API](https://platform.moonshot.cn/)
+- [智谱 AI](https://open.bigmodel.cn/)
+- [通义千问](https://dashscope.console.aliyun.com/)
+
+### 3. 启动服务
+
+**终端 1 - 启动后端：**
 
 ```bash
-# 前端
-cd frontend
-npm run dev
-
-# 后端（可选）
 cd backend
 npm start
 ```
 
-### 构建生产版本
+后端服务运行在 http://localhost:3001
+
+**终端 2 - 启动前端：**
 
 ```bash
-# 前端
 cd frontend
-npm run build
+npm run dev
 ```
 
-项目已准备好部署！
+前端服务运行在 http://localhost:5173
 
-### Vercel 部署配置
-1. 将代码推送到 GitHub
-2. 在 Vercel 中导入项目
-- Framework Preset: Vite
-- Build Command: `npm run build`
-- Output Directory: `dist`
+### 4. 打开应用
 
-## 📁 项目结构
+在浏览器中打开 http://localhost:5173
+
+## 项目结构
 
 ```
-Prompt-Optimizer/
-├── frontend/                # 前端项目
+zhilingyouhua_cn/
+├── frontend/                 # 前端项目
 │   ├── src/
-│   │   ├── components/     # 公共组件
-│   │   ├── pages/          # 页面组件
-│   │   ├── hooks/          # 自定义 Hooks
-│   │   ├── contexts/       # Context 状态管理
-│   │   ├── services/       # 服务层
-│   │   ├── utils/          # 工具函数
-│   │   └── data/           # 静态数据
-│   ├── public/             # 静态资源
-│   └── package.json
-├── backend/                 # 后端项目（预留）
-├── docs/                   # 项目文档
+│   │   ├── components/      # 通用组件
+│   │   ├── pages/           # 页面组件
+│   │   ├── hooks/           # 自定义 Hooks
+│   │   ├── services/        # API 服务
+│   │   ├── data/            # 数据文件
+│   │   └── utils/           # 工具函数
+│   └── ...
+│
+├── backend/                  # 后端项目
+│   ├── services/            # 大模型服务
+│   ├── server.js            # 服务入口
+│   └── .env                 # 环境变量
+│
 └── README.md
 ```
 
-## 📄 页面路由
+## 使用说明
 
-| 路径 | 页面 | 说明 |
-|-----|------|------|
-| `/` | 品牌首页 | 公开访问 |
-| `/login` | 登录页 | 未登录可访问 |
-| `/register` | 注册页 | 未登录可访问 |
-| `/tool` | 优化工具 | 需登录 |
-| `/store` | 规则商店 | 需登录 |
-| `/create` | 新建规则 | 需登录 |
-| `/edit/:id` | 编辑规则 | 需登录 |
+### 1. 快速优化
 
-## 🎨 设计规范
+1. 在输入框中输入或粘贴要优化的内容
+2. 选择一个优化规则（默认已选中）
+3. 点击「开始优化」按钮
+4. 查看并复制优化结果
 
-### 品牌色
-- **主色**: 蓝色 (#3B82F6)
-- **辅助色**: 紫色 (#8B5CF6)
-- **强调色**: 粉色 (#EC4899)
+### 2. 使用规则商店
 
-### 图标风格
-- 统一线条风格
-- SVG 图标
-- 蓝色系为主
+1. 点击底部导航的「规则商店」
+2. 浏览或搜索规则
+3. 点击「选用此规则」跳转到优化页面
+4. 点击规则卡片可编辑或删除
 
-## 📝 更新日志
+### 3. 创建自定义规则
 
-查看 [CHANGELOG.md](docs/CHANGELOG.md) 了解版本更新历史。
+1. 点击底部导航的「创建规则」
+2. 填写规则名称、简介和提示词
+3. 可以参考预设模板
+4. 点击「保存并使用」
 
-## 📄 许可证
+## 预置规则
 
-MIT License
+| 规则名称 | 功能说明 |
+|---------|---------|
+| 错别字纠正 | 修正错别字，删除语气词 |
+| 简洁优化 | 删除冗余，保留核心 |
+| 详细扩展 | 补充细节，内容更完整 |
+| 正式化表达 | 转换为正式书面语 |
+| 口语转文案 | 口语转专业文案 |
 
-## 👤 作者
+## 后续扩展
 
-**lunafranklin**
+- 🌐 浏览器插件
+- 📝 历史记录
+- 🌏 多语言支持
+- 👤 用户登录/云端同步
+- 🔗 规则分享
 
----
+## 许可证
 
-<p align="center">
-  Made with ❤️ by lunafranklin
-</p>
+MIT
