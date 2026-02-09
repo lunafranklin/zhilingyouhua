@@ -120,17 +120,23 @@ export function useRules() {
 
 /**
  * 自定义 Hook：管理新手引导状态
+ * @param {boolean} isAuthenticated - 用户是否已登录
  */
-export function useFirstVisit() {
+export function useFirstVisit(isAuthenticated) {
   const [showGuide, setShowGuide] = useState(false);
 
   useEffect(() => {
+    // 只有已登录用户才显示引导
+    if (!isAuthenticated) {
+      return;
+    }
+    
     // 检查是否是首次访问
     const isFirst = !localStorage.getItem('has_visited');
     if (isFirst) {
       setShowGuide(true);
     }
-  }, []);
+  }, [isAuthenticated]);
 
   const closeGuide = useCallback(() => {
     setShowGuide(false);

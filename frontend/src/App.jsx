@@ -188,7 +188,7 @@ function Header({ isMobile }) {
 /**
  * PC端布局
  */
-function PCLayout({ children }) {
+function PCLayout({ children, showGuide, closeGuide }) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header isMobile={false} />
@@ -203,6 +203,8 @@ function PCLayout({ children }) {
           <span>SmartTuneAI · 每日10次使用</span>
         </div>
       </footer>
+
+      <GuideModal show={showGuide} onClose={closeGuide} />
     </div>
   );
 }
@@ -210,7 +212,7 @@ function PCLayout({ children }) {
 /**
  * 移动端布局 - 使用顶部导航，不再使用底部导航
  */
-function MobileLayout({ children, showBottomNav }) {
+function MobileLayout({ children, showBottomNav, showGuide, closeGuide }) {
   return (
     <div className="max-w-lg mx-auto bg-white min-h-screen shadow-lg">
       {/* 顶部导航 */}
@@ -225,6 +227,8 @@ function MobileLayout({ children, showBottomNav }) {
       {showBottomNav && (
         <Navigation isMobile={true} />
       )}
+
+      <GuideModal show={showGuide} onClose={closeGuide} />
     </div>
   );
 }
@@ -233,7 +237,8 @@ function MobileLayout({ children, showBottomNav }) {
  * 主应用组件
  */
 function AppContent() {
-  const { showGuide, closeGuide } = useFirstVisit();
+  const { isAuthenticated } = useAuth();
+  const { showGuide, closeGuide } = useFirstVisit(isAuthenticated);
   const [isMobile, setIsMobile] = useState(true);
 
   // 检测屏幕宽度
@@ -252,7 +257,7 @@ function AppContent() {
   if (!isMobile) {
     return (
       <div className="min-h-screen bg-gray-100">
-        <PCLayout>
+        <PCLayout showGuide={showGuide} closeGuide={closeGuide}>
           <Suspense fallback={<PageLoading />}>
             <Routes>
               {/* 品牌首页 - 公开访问 */}
@@ -298,8 +303,6 @@ function AppContent() {
             </Routes>
           </Suspense>
         </PCLayout>
-
-        <GuideModal show={showGuide} onClose={closeGuide} />
       </div>
     );
   }
@@ -307,7 +310,7 @@ function AppContent() {
   // 移动端布局 - 统一使用顶部导航
   return (
     <div className="min-h-screen bg-gray-100">
-      <MobileLayout showBottomNav={true}>
+      <MobileLayout showBottomNav={true} showGuide={showGuide} closeGuide={closeGuide}>
         <Suspense fallback={<PageLoading />}>
           <Routes>
             {/* 品牌首页 - 公开访问 */}
@@ -353,8 +356,6 @@ function AppContent() {
           </Routes>
         </Suspense>
       </MobileLayout>
-
-      <GuideModal show={showGuide} onClose={closeGuide} />
     </div>
   );
 }
