@@ -1,0 +1,19 @@
+{
+  "name": "SmartTuneAI 智能指令优化",
+  "type": "website",
+  "version": "0.1.0",
+  "created": "2025-02-04",
+  "description": "基于 AI 大模型的智能指令优化工具",
+  "techStack": {
+    "frontend": "React + Vite + TailwindCSS",
+    "backend": "Node.js + Express",
+    "ai": "ModelScope 大模型 API"
+  },
+  "features": [
+    "用户注册/登录系统",
+    "指令优化工具",
+    "规则商店",
+    "自定义规则",
+    "预设优化规则"
+  ]
+}
