@@ -4,7 +4,9 @@
  * 
  * 开发阶段使用本地端口，生产环境需要修改为实际后端地址
  */
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = import.meta.env.PROD 
+  ? 'https://你的后端域名.com/api'  // 生产环境：替换为你的后端地址
+  : 'http://localhost:3001/api';    // 开发环境
 
 /**
  * 优化文本
