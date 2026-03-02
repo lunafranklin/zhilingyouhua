@@ -41,7 +41,7 @@ async function optimizeWithModelScope(text, prompt) {
     throw new Error('缺少 ModelScope API Key。请在 .env 文件中配置 MODELSCOPE_API_KEY');
   }
 
-  const fullPrompt = `${prompt}\n\n==========\n待优化文本：\n${text}\n==========\n\n优化后的文本：`;
+  const fullPrompt = `${prompt}\n\n==========\n用户的原始指令：\n${text}\n==========\n\n请严格按照上述规则优化这条指令，只输出优化后的指令，不需要任何解释和说明。`;
 
   const response = await axios.post(
     'https://api-inference.modelscope.cn/v1/chat/completions',
@@ -78,7 +78,7 @@ async function optimizeWithOpenAI(text, prompt) {
     throw new Error('缺少 OpenAI API Key');
   }
 
-  const fullPrompt = `${prompt}\n\n==========\n待优化文本：\n${text}\n==========\n\n优化后的文本：`;
+  const fullPrompt = `${prompt}\n\n==========\n用户的原始指令：\n${text}\n==========\n\n请严格按照上述规则优化这条指令，只输出优化后的指令，不需要任何解释和说明。`;
 
   const response = await axios.post(
     'https://api.openai.com/v1/chat/completions',
@@ -116,7 +116,7 @@ async function optimizeWithKimi(text, prompt) {
     throw new Error('缺少 Kimi API Key。请在 .env 文件中配置 KIMI_API_KEY');
   }
 
-  const fullPrompt = `${prompt}\n\n==========\n待优化文本：\n${text}\n==========\n\n优化后的文本：`;
+  const fullPrompt = `${prompt}\n\n==========\n用户的原始指令：\n${text}\n==========\n\n请严格按照上述规则优化这条指令，只输出优化后的指令，不需要任何解释和说明。`;
 
   const response = await axios.post(
     `https://api.moonshot.cn/v1/chat/completions`,
@@ -154,7 +154,7 @@ async function optimizeWithZhipu(text, prompt) {
     throw new Error('缺少智谱 AI API Key');
   }
 
-  const fullPrompt = `${prompt}\n\n==========\n待优化文本：\n${text}\n==========\n\n优化后的文本：`;
+  const fullPrompt = `${prompt}\n\n==========\n用户的原始指令：\n${text}\n==========\n\n请严格按照上述规则优化这条指令，只输出优化后的指令，不需要任何解释和说明。`;
 
   const response = await axios.post(
     `https://api.bigmodel.cn/api/paas/v4/chat/completions`,
